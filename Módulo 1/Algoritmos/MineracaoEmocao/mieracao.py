@@ -53,3 +53,13 @@ def aplicaStemmer(texto):
 
 frasesComStemming = aplicaStemmer(base)
 print(frasesComStemming)
+
+
+def buscaPalavras(frases):
+    todasAsPalavras = []
+    for(palavras, emocao) in frases:
+        todasAsPalavras.extend(palavras)
+    return todasAsPalavras
+
+
+palavras = buscaPalavras(frasesComStemming)
