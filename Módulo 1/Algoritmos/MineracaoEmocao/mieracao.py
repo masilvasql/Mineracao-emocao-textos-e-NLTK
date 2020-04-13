@@ -57,9 +57,27 @@ print(frasesComStemming)
 
 def buscaPalavras(frases):
     todasAsPalavras = []
-    for(palavras, emocao) in frases:
+    for (palavras, emocao) in frases:
         todasAsPalavras.extend(palavras)
     return todasAsPalavras
 
 
 palavras = buscaPalavras(frasesComStemming)
+
+
+def buscaFrequencia(palavras):
+    palavras = nltk.FreqDist(palavras)
+    return palavras
+
+
+frequencia = buscaFrequencia(palavras)
+print(frequencia.most_common(50))
+
+
+def buscaPalavrasUnicas(frequencia):
+    freq = frequencia.keys()
+    return freq
+
+
+palavrasUnicas = buscaPalavrasUnicas(frequencia)
+print(palavrasUnicas)
