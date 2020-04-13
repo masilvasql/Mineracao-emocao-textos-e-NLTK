@@ -25,17 +25,31 @@ base = [('eu sou admirada por muitos', 'alegria'),
 
 stopwords = ['a', 'agora', 'algum', 'alguma', 'aquele', 'aqueles', 'de', 'deu', 'do', 'e', 'estou', 'esta', 'esta',
              'ir', 'meu', 'muito', 'mesmo', 'no', 'nossa', 'o', 'outro', 'para', 'que', 'sem', 'talvez', 'tem', 'tendo',
-             'tenha', 'teve', 'tive', 'todo', 'um', 'uma', 'umas', 'uns', 'vou'] #stop Words manuais, utilizar apenas se diver algo personalizado, caso contrário, utilizar a do NLTK
+             'tenha', 'teve', 'tive', 'todo', 'um', 'uma', 'umas', 'uns',
+             'vou']  # stop Words manuais, utilizar apenas se diver algo personalizado, caso contrário, utilizar a do NLTK
 
-stopWordsNLTK = nltk.corpus.stopwords.words('portuguese') #lista de stop words do próprio NLTK
+stopWordsNLTK = nltk.corpus.stopwords.words('portuguese')  # lista de stop words do próprio NLTK
 
-
+'''
 def removeStopWords(texto):
     frases = []
     for (palavras, emocao) in texto:
         semStop = [p for p in palavras.split() if p not in stopWordsNLTK]
         frases.append((semStop, emocao))
     return frases
+'''
 
 
-print(removeStopWords(base))
+# extrai o radical das frases e remove stop Words
+def aplicaStemmer(texto):
+    # RSLPStemmer -> stemmer específico para o português
+    stemmer = nltk.stem.RSLPStemmer()
+    frasesStemming = []
+    for (palavras, emocao) in texto:
+        comStemming = [str(stemmer.stem(p)) for p in palavras.split() if p not in stopWordsNLTK]
+        frasesStemming.append((comStemming, emocao))
+    return frasesStemming
+
+
+frasesComStemming = aplicaStemmer(base)
+print(frasesComStemming)
