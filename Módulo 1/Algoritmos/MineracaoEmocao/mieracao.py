@@ -81,3 +81,17 @@ def buscaPalavrasUnicas(frequencia):
 
 palavrasUnicas = buscaPalavrasUnicas(frequencia)
 print(palavrasUnicas)
+
+def extratorPalavras(documento):
+    doc = set(documento)
+    caracteristicas = {}
+    for palavras in palavrasUnicas:
+        caracteristicas['%s' % palavras] = (palavras in doc)
+    return caracteristicas
+
+
+caracteristicasFrase = extratorPalavras(['am','nov','dia'])
+print(caracteristicasFrase)
+
+#nesta parte, o extratorPalavras, é passado só com o nome, sem fazer a chamada da função ()
+baseCompleta = nltk.classify.apply_features(extratorPalavras, frasesComStemming)
